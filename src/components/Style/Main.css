@@ -1,6 +1,95 @@
+.residents_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+    font-family: var(--font-title);
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    scroll-margin-top: 1.5rem;
+}
+.residents_title span{
+    min-width: 2.2rem;
+    padding: 0.1rem 0.7rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--bg);
+    background: var(--portal);
+    box-shadow: var(--glow);
+}
+
 .resident_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.residents_empty{
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: 1px dashed var(--card-border);
+    color: var(--muted);
+    animation: fade-up 0.6s ease both;
+}
+.residents_empty span{
+    display: block;
+    font-size: 3.5rem;
+    margin-bottom: 0.6rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ---------- Pagination ---------- */
+.pagination{
     display: flex;
     flex-wrap: wrap;
-    gap: 3em;
     justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+}
+.pagination_btn{
+    min-width: 2.6rem;
+    height: 2.6rem;
+    padding: 0 0.6rem;
+    border-radius: 0.8rem;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+.pagination_btn:hover:not(:disabled){
+    transform: translateY(-3px);
+    border-color: var(--portal);
+}
+.pagination_btn.is-active{
+    background: var(--portal);
+    color: var(--bg);
+    box-shadow: var(--glow);
+}
+.pagination_btn:disabled{
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+.pagination_dots{
+    color: var(--muted);
+    padding: 0 0.2rem;
+}
+
+@media (max-width: 400px){
+    .pagination{
+        gap: 0.35rem;
+    }
+    .pagination_btn{
+        min-width: 2.2rem;
+        height: 2.2rem;
+        font-size: 0.9rem;
+    }
 }

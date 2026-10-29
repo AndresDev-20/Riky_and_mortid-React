@@ -1,46 +1,142 @@
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@600&display=swap');
 .location{
-    padding: 2em;
-    border-radius: 0.8em;
-    background-color: #062226;
-    max-width: 600px;
-    margin-bottom: 3em;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0.2em 0.2em 1em #0009;
+    position: relative;
+    max-width: 820px;
+    margin: -3rem auto 4rem;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    text-align: center;
+    overflow: hidden;
+    animation: location-in 0.7s cubic-bezier(.2, .9, .3, 1.2) both;
+}
+/* Animated border light */
+.location::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(from var(--angle, 0deg), transparent 0 70%, var(--portal-light), var(--cyan), transparent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: spin-angle 5s linear infinite;
+    pointer-events: none;
+}
+@property --angle{
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+@keyframes spin-angle{
+    to{ --angle: 360deg; }
+}
+@keyframes location-in{
+    from{ opacity: 0; transform: translateY(40px) scale(0.96); }
+    to{ opacity: 1; transform: none; }
+}
+.location_id{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--cyan);
+    background: rgba(0, 181, 204, 0.12);
+    border: 1px solid rgba(0, 181, 204, 0.35);
+}
+.location_kicker{
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
 }
 .location_name{
-    text-align: center;
-    margin-bottom: 1em;
-    color: rgb(125,199,14);
-    font-family: 'Merienda', cursive;
+    font-family: var(--font-title);
+    font-size: clamp(1.5rem, 4.5vw, 2.4rem);
+    line-height: 1.25;
+    margin-bottom: 1.6rem;
+    background: linear-gradient(90deg, var(--portal-light), var(--cyan), var(--portal-light));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 4s linear infinite;
+    word-break: break-word;
+}
+@keyframes shine{
+    to{ background-position: 200% center; }
 }
 .location_list{
-    display: flex;
-    gap: 1em;
-    justify-content: space-around;
-    font-family: 'Merienda', cursive;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
 }
 .location_item{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5em;
-    color: #aaa;
-    font-weight: 500;
+    gap: 0.25rem;
+    padding: 1rem 0.6rem;
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s, background 0.3s, border-color 0.3s;
+    animation: fade-up 0.6s ease both;
+}
+.location_item:nth-child(1){ animation-delay: 0.25s; }
+.location_item:nth-child(2){ animation-delay: 0.35s; }
+.location_item:nth-child(3){ animation-delay: 0.45s; }
+.location_item:hover{
+    transform: translateY(-4px);
+    background: rgba(151, 206, 76, 0.08);
+    border-color: var(--card-border);
+}
+.location_icon{
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
 }
 .location_label{
-    color: white;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
 }
-@media (min-width: 700px) {
+.location_value{
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+}
+
+@media (max-width: 600px){
     .location{
-        padding: 2em;
-        border-radius: 0.8em;
-        background-color: #062226;
-        max-width: 600px;
-        margin-bottom: 8em;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 0.2em 0.2em 1em #0009;
+        padding: 2.4rem 1rem 1.2rem;
+        margin-bottom: 3rem;
+    }
+    .location_list{
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+    .location_item{
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 0.8rem;
+        text-align: left;
+        padding: 0.8rem 1rem;
+    }
+    .location_icon{
+        margin: 0;
+        font-size: 1.3rem;
+    }
+    .location_value{
+        text-align: right;
     }
 }

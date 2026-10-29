@@ -1,24 +1,74 @@
+:root{
+    --bg: #050816;
+    --bg-soft: #0b1229;
+    --card: rgba(12, 24, 48, 0.72);
+    --card-border: rgba(151, 206, 76, 0.18);
+    --portal: #97ce4c;
+    --portal-light: #c9f56a;
+    --cyan: #00b5cc;
+    --pink: #e4a788;
+    --text: #e8f1ff;
+    --muted: #8fa3bf;
+    --danger: #ff5b5b;
+    --radius: 1.2rem;
+    --font-title: 'Merienda', cursive;
+    --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --glow: 0 0 20px rgba(151, 206, 76, 0.55), 0 0 60px rgba(151, 206, 76, 0.25);
+}
 *{
     box-sizing: border-box;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     margin: 0;
-    color: white;
+    min-height: 100vh;
+    color: var(--text);
+    background-color: var(--bg);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 h1, h2, h3, h4, p, ul{
     margin-top: 0;
     margin-bottom: 0;
-} 
+}
 ul{
     list-style: none;
     padding: 0;
 }
-input{
-    outline: 0;
-    border: 0;
-    text-align: center;
+input, button{
+    font: inherit;
 }
 img{
     display: block;
-    width: 100%;
+    max-width: 100%;
+}
+::selection{
+    background: var(--portal);
+    color: var(--bg);
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(var(--portal), var(--cyan));
+    border-radius: 10px;
+}
+:focus-visible{
+    outline: 2px solid var(--portal-light);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
